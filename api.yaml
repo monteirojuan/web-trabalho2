@@ -1,0 +1,104 @@
+openapi: 3.0.0
+info:
+  version: 0.1.0
+  title: backend api
+paths:
+  /reservas:
+    get:
+      responses:
+        "200":
+          description: lista com as reservas feitas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reserva"
+        "500":
+          description: erro ao listar reservas
+  /reserva/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1
+          description: id da reserva
+      responses:
+        "200":
+          description: detalhes da reserva
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reserva"
+        "400":
+          description: reserva não encontrada
+        "500":
+          description: erro ao buscar reserva
+  /reserva:
+    post:
+      responses:
+        "200":
+          description: nova reserva feitas
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Reserva"
+        "500":
+          description: erro ao criar reserva
+  /destinos:
+    get:
+      responses:
+        "200":
+          description: lista com todos os destinos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Destino"
+  /destino/{id}:
+    get:
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1
+          description: id do destino
+      responses:
+        "200":
+          description: detalhes do destino
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Destino"
+        "400":
+          description: destino não encontrado
+        "500":
+          description: erro ao buscar destino
+components:
+  schemas:
+    Reserva:
+      type: object
+      properties:
+        origem:
+          type: string
+        destino:
+          $ref: "#/components/schemas/Destino"
+        data:
+          type: number
+    Destino:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        preco:
+          type: integer
