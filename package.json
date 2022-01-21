@@ -1,0 +1,21 @@
+{
+  "name": "trabalho-2-web",
+  "version": "0.1.0",
+  "description": "trabalho 2 da disciplina de web",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "express": "^4.17.2",
+    "sequelize": "^6.13.0",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1",
+    "sucrase": "^3.20.3"
+  }
+}
