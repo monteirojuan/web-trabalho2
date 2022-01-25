@@ -7,11 +7,28 @@ const app = express()
 const port = 3000
 
 
-app.get('/', async (req, res) => {
-    let u = await db.User.findOne()
-    res.json({ message: "hello world", user: u })
+app.get('/destinos', async (req, res) => {
+    try {
+        let destinos = await db.Destino.findAll()
+        res.json({ destinos: destinos })
+    } catch {
+        res.status(500)
+        res.send('Internal Server Error')
+    }
+})
+
+app.get('/destino/:id', async (req, res) => {
+    try {
+        let destino = await db.Destino.findOne({
+            where: { id: req.params.id }
+        })
+        res.json(destino)
+    } catch {
+        res.status(500)
+        res.send('Internal Server Error')
+    }
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at http:/localhost:${port}`)
+    console.log(`Example app listening at http://localhost:${port}`)
 })
