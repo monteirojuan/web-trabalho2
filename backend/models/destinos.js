@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
         preco: DataTypes.DECIMAL
     }, {
         sequelize,
-        inicio: 'Destino',
+        modelName: 'Destino',
     });
     return Destino;
 };

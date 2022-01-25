@@ -27,6 +27,30 @@ app.get('/destino/:id', async (req, res) => {
     }
 })
 
+// RESERVAS
+
+app.get('/reservas', async (req, res) => {
+    try {
+        let reservas = await db.Reserva.findAll()
+        res.json({ reservas: reservas })
+    } catch (e) {
+        console.log(e)
+        res.status(500)
+        res.send('Internal Server Error')
+    }
+})
+
+app.get('/reserva/:id', async (req, res) => {
+    try {
+        let reserva = await db.Reserva.findByPk(parseInt(req.params.id))
+        res.json(reserva)
+    } catch (e) {
+        console.log(e)
+        res.status(500)
+        res.send('Internal Server Error')
+    }
+})
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
