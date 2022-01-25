@@ -43,6 +43,8 @@ paths:
           description: erro ao buscar reserva
   /reserva:
     post:
+      requestBody:
+        $ref: "#/components/requestBodies/NovaReservaBody"
       responses:
         "200":
           description: nova reserva feitas
@@ -90,11 +92,15 @@ components:
     Reserva:
       type: object
       properties:
-        origem:
+        partida:
           type: string
+        retorno:
+          type: string
+        duracao:
+          type: integer
         destino:
           $ref: "#/components/schemas/Destino"
-        data:
+        preco:
           type: number
     Destino:
       type: object
@@ -105,3 +111,21 @@ components:
           type: string
         preco:
           type: integer
+  requestBodies:
+    NovaReservaBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id_destino:
+                type: integer
+              partida:
+                type: string
+              retorno:
+                type: string
+          example:
+            id_destino: 1
+            partida: 2022-01-25T22:31:37.000Z
+            retorno: 2022-01-25T22:31:37.000Z
