@@ -19,9 +19,7 @@ app.get('/destinos', async (req, res) => {
 
 app.get('/destino/:id', async (req, res) => {
     try {
-        let destino = await db.Destino.findOne({
-            where: { id: req.params.id }
-        })
+        let destino = await db.Destino.findByPk(parseInt(req.params.id))
         res.json(destino)
     } catch {
         res.status(500)
