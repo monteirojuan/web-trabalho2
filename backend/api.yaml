@@ -96,8 +96,6 @@ components:
           type: string
         retorno:
           type: string
-        duracao:
-          type: integer
         destino:
           $ref: "#/components/schemas/Destino"
         preco:
