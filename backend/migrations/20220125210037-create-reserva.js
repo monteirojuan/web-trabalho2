@@ -10,15 +10,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       partida: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       retorno: {
+        allowNull: false,
         type: Sequelize.DATE
       },
-      duracao: {
-        type: Sequelize.INTEGER
-      },
       preco: {
+        allowNull: false,
         type: Sequelize.DECIMAL
       },
       createdAt: {

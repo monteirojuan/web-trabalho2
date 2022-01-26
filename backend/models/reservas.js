@@ -15,7 +15,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         partida: DataTypes.DATE,
         retorno: DataTypes.DATE,
-        duracao: DataTypes.INTEGER,
         preco: DataTypes.DECIMAL
     }, {
         sequelize,
