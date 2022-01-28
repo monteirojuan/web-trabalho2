@@ -69,6 +69,18 @@ app.get('/reserva/:id', async (req, res) => {
     }
 })
 
+app.delete('/reserva/:id', async (req, res) => {
+    let apagados = await db.Reserva.destroy({ where: { id: parseInt(req.params.id) } })
+    if (apagados > 0) {
+        res.status(200)
+        res.send('Sucesso')
+    } else {
+        res.status(500)
+        res.send('Erro ao remover.')
+    }
+    console.log(req.params.id)
+})
+
 app.post('/reserva', async (req, res) => {
     try {
         let partida = new Date(req.body.partida),
