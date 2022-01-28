@@ -115,10 +115,10 @@ components:
       properties:
         partida:
           type: string
-          example: "2022-08-20"
+          example: "2022-08-20T00:00:00.000Z"
         retorno:
           type: string
-          example: "2022-08-30"
+          example: "2022-08-30T00:00:00.000Z"
         destino:
           $ref: "#/components/schemas/Destino"
         passageiro:
