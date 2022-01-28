@@ -114,6 +114,15 @@ components:
           type: string
         preco:
           type: integer
+    Passageiro:
+      type: object
+      properties:
+        nome:
+          type: string
+          example: João da Silva
+        cpf:
+          type: string
+          example: 000.000.000-00
   requestBodies:
     NovaReservaBody:
       required: true
