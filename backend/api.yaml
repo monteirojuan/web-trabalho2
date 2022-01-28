@@ -8,6 +8,7 @@ servers:
 paths:
   /reservas:
     get:
+      summary: Lista reservas
       responses:
         "200":
           description: lista com as reservas feitas
@@ -21,6 +22,7 @@ paths:
           description: erro ao listar reservas
   /reserva/{id}:
     get:
+      summary: Detalhes da reserva por ID
       parameters:
         - in: path
           name: id
@@ -43,6 +45,7 @@ paths:
           description: erro ao buscar reserva
   /reserva:
     post:
+      summary: Adiciona nova reserva
       requestBody:
         $ref: "#/components/requestBodies/NovaReservaBody"
       responses:
@@ -56,6 +59,7 @@ paths:
           description: erro ao criar reserva
   /destinos:
     get:
+      summary: Lista destinos
       responses:
         "200":
           description: lista com todos os destinos
@@ -67,6 +71,7 @@ paths:
                   $ref: "#/components/schemas/Destino"
   /destino/{id}:
     get:
+      summary: Detalhes do destino por ID
       parameters:
         - in: path
           name: id
