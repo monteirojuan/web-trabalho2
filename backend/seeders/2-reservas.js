@@ -5,8 +5,9 @@ module.exports = {
     await queryInterface.bulkInsert('Reservas', [
       {
         DestinoId: 1,
-        partida: Date('December 17, 2022 03:24:00'),
-        retorno: Date('December 19, 2022 19:02:00'),
+        PassageiroId: 1,
+        partida: new Date('2022-12-17'),
+        retorno: new Date('2022-12-19'),
         preco: 750,
         createdAt: new Date(),
         updatedAt: new Date()

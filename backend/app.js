@@ -44,7 +44,23 @@ app.get('/reservas', async (req, res) => {
 
 app.get('/reserva/:id', async (req, res) => {
     try {
-        let reserva = await db.Reserva.findByPk(parseInt(req.params.id))
+        let reserva = await db.Reserva.findByPk(
+            parseInt(req.params.id),
+            {
+                attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
+                include: [
+                    {
+                        model: db.Destino,
+                        attributes: { exclude: ['createdAt', 'updatedAt'] }
+                    },
+                    {
+                        model: db.Passageiro,
+                        attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+                    }
+
+                ],
+            }
+        )
         res.json(reserva)
     } catch (e) {
         console.log(e)
@@ -60,13 +76,49 @@ app.post('/reserva', async (req, res) => {
         if (partida.getTime() >= retorno.getTime()) {
             throw new Error('Partida tem que ser menor que retorno.')
         }
+
+        // busca passageiro
+        let passageiro = await db.Passageiro.findOne(
+            { where: { cpf: req.body.passageiro.cpf } }
+        )
+        // cria passageiro se não existir
+        if (passageiro === null) {
+            passageiro = await db.Passageiro.create({
+                nome: req.body.passageiro.nome,
+                cpf: req.body.passageiro.cpf
+            })
+        }
+
+        // carrega destino
         let destino = await db.Destino.findByPk(parseInt(req.body.id_destino))
-        const reserva = await db.Reserva.create({
+
+        // salva reserva
+        let reserva = await db.Reserva.create({
             DestinoId: destino.id,
             preco: destino.preco,
             partida: partida,
-            retorno: retorno
+            retorno: retorno,
+            PassageiroId: passageiro.id
         })
+
+        // busca reserva, para carregar associações
+        reserva = await db.Reserva.findByPk(
+            parseInt(reserva.id),
+            {
+                attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
+                include: [
+                    {
+                        model: db.Destino,
+                        attributes: { exclude: ['createdAt', 'updatedAt'] }
+                    },
+                    {
+                        model: db.Passageiro,
+                        attributes: { exclude: ['createdAt', 'updatedAt'] }
+                    }
+
+                ],
+            }
+        )
         res.json(reserva)
     } catch (e) {
         console.log(e)

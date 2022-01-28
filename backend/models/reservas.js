@@ -1,10 +1,11 @@
 'use strict';
-const { Model, INET } = require('sequelize');
+const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
     class Reserva extends Model {
         static associate(models) {
             this.belongsTo(models.Destino, { foreignKey: { allowNull: false } })
+            this.belongsTo(models.Passageiro, { foreignKey: { allowNull: false } })
         }
     }
     Reserva.init({
