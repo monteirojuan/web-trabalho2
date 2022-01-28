@@ -43,6 +43,22 @@ paths:
           description: reserva não encontrada
         "500":
           description: erro ao buscar reserva
+    delete:
+      summary: Remove uma reserva
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1
+          description: id do destino
+      responses:
+        "200":
+          description: reserva removida com sucesso
+        "500":
+          description: erro ao remover reserva
   /reserva:
     post:
       summary: Adiciona nova reserva
