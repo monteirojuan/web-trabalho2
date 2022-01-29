@@ -10,7 +10,7 @@
     box-sizing: border-box;
     outline: none; border:none;
     text-decoration: none;
-    text-transform: capitalize;
+    text-transform: initial;
 }
 
 html {
@@ -267,7 +267,7 @@ header .icons #menu-bars {
 
 .services .box-container .box p {
     font-size: 1.5rem;
-    color:#666;
+    color: black;
     padding:.5rem 0;
     line-height: 2;
 }
