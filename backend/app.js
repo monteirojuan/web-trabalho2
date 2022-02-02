@@ -4,7 +4,7 @@ import express from 'express'
 import db from './models'
 
 const app = express()
-const port = 3000
+const port = 4000
 
 app.use(express.json())
 
