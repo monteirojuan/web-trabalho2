@@ -36,7 +36,6 @@ section {
     border-radius: .5rem;
     font-size: 1.7rem;
     color:var(--tom_de_verde);
-    background:var(--tom_de_brancot);
     cursor: pointer;
     text-align: center;
 }
@@ -55,7 +54,6 @@ section {
 
 .heading span {
     color:var(--tom_de_verde);
-    background:var(--tom_de_branco);
     border-radius: .5rem;
     padding:.2rem 1.5rem;
 }
@@ -100,7 +98,6 @@ header .icons #menu-bars, header .icons a {
     margin-right: .5rem;
     border-radius: .5rem;
     color:var(--tom_de_verde);
-    background:var(--tom_de_branco);
     text-align: center;
 }
 
