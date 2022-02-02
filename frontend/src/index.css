@@ -114,6 +114,7 @@ header .icons #menu-bars {
     display: flex;
     flex-wrap: wrap;
     gap:1.5rem;
+    padding-top: 8rem;
 }
 
 .offers .box-container .box {
