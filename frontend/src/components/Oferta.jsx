@@ -4,7 +4,7 @@ class Oferta extends Component {
     render() {
         return <div class="box">
             <div class="image-container">
-                <img src="./imagens/amesterdao.jpg" alt="" />
+                <img src={"./imagens/destinos/" + this.props.nome.toLowerCase() + ".jpg"} alt="" />
                 <div class="info">
                     <h3>1 hora atrás</h3>
                 </div>
