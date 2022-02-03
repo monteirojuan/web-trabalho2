@@ -35,7 +35,22 @@ app.get('/destino/:id', async (req, res) => {
 
 app.get('/reservas', async (req, res) => {
     try {
-        let reservas = await db.Reserva.findAll()
+        let reservas = await db.Reserva.findAll(
+            {
+                attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
+                include: [
+                    {
+                        model: db.Destino, as: 'destino',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] }
+                    },
+                    {
+                        model: db.Passageiro, as: 'passageiro',
+                        attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+                    }
+
+                ],
+            }
+        )
         res.json({ reservas: reservas })
     } catch (e) {
         console.log(e)
