@@ -43,6 +43,28 @@ paths:
           description: reserva não encontrada
         "500":
           description: erro ao buscar reserva
+    put:
+      summary: Atualiza informações de uma reserva
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 1
+          description: id da reserva
+      requestBody:
+        $ref: "#/components/requestBodies/NovaReservaBody"
+      responses:
+        "200":
+          description: alterações salvas
+          content:
+            appplication/json:
+              schema:
+                $ref: "#/components/schemas/Reserva"
+        "500":
+          description: erro ao alterar reserva
     delete:
       summary: Remove uma reserva
       parameters:
