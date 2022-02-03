@@ -343,6 +343,39 @@ header .icons #menu-bars {
     background-color: var(--tom_de_verde_claro);
 }
 
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+  
+.content-table thead tr {
+    background-color: var(--tom_de_verde_claro);
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+  
+.content-table th, .content-table td {
+    padding: 12px 15px;
+}
+  
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+  
+.content-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+  
+.content-table tbody tr:last-of-type {
+    border-bottom: 2px solid var(--tom_de_verde_claro);
+}
+  
+.content-table tbody tr.active-row {
+    font-weight: bold;
+    color: var(--tom_de_verde_claro);
+}
+
 
 @media (max-width:991px){
 
