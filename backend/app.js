@@ -179,11 +179,11 @@ app.post('/reserva', async (req, res) => {
                 attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
                 include: [
                     {
-                        model: db.Destino,
+                        model: db.Destino, as: 'destino',
                         attributes: { exclude: ['createdAt', 'updatedAt'] }
                     },
                     {
-                        model: db.Passageiro,
+                        model: db.Passageiro, as: 'passageiro',
                         attributes: { exclude: ['createdAt', 'updatedAt'] }
                     }
 
