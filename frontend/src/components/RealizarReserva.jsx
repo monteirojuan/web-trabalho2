@@ -29,3 +29,4 @@ class RealizarReserva extends Component {
         </section>
     }
 }
+export default RealizarReserva
