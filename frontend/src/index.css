@@ -304,6 +304,44 @@ header .icons #menu-bars {
     padding:.2rem 0;
 }
 
+.reserva .row{
+    background: #fff;
+    border:.1rem solid rgba(0,0,0,.2);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+    border-radius: .5rem;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    padding:1rem;
+}
+
+.reserva .row form{
+    flex:1 1 50rem;
+    padding:.5rem 1rem;
+}
+
+
+.reserva .row form .inputBox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.reserva .row form .inputBox input{
+    margin-top: 1rem;
+    padding:1rem;
+    font-size: 1.7rem;
+    color:#333;
+    background: #f7f7f7;
+    border-radius: .5rem;
+    text-transform: none;
+    width:49%;
+}
+
+
+.reserva .row form .inputBox input:focus{
+    background-color: var(--tom_de_verde_claro);
+}
+
 
 @media (max-width:991px){
 
