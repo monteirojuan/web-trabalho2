@@ -67,17 +67,59 @@ app.get('/reserva/:id', async (req, res) => {
                 attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
                 include: [
                     {
-                        model: db.Destino,
+                        model: db.Destino, as: 'destino',
                         attributes: { exclude: ['createdAt', 'updatedAt'] }
                     },
                     {
-                        model: db.Passageiro,
+                        model: db.Passageiro, as: 'passageiro',
                         attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
                     }
 
                 ],
             }
         )
+        res.json(reserva)
+    } catch (e) {
+        console.log(e)
+        res.status(500)
+        res.send('Internal Server Error')
+    }
+})
+
+app.put('/reserva/:id', async (req, res) => {
+    try {
+        let reserva = await db.Reserva.findByPk(parseInt(req.params.id))
+        let novaReserva = {
+            destinoId: req.body.id_destino,
+            partida: req.body.partida,
+            retorno: req.body.retorno
+        }
+        if (novaReserva.DestinoId != reserva.DestinoId) {
+            let destino = await db.Destino.findByPk(parseInt(novaReserva.DestinoId))
+            novaReserva.preco = destino.preco
+        }
+        await db.Reserva.update(novaReserva, { where: { id: parseInt(req.params.id) } })
+
+        // recarrega com relacionamentos
+        reserva = await db.Reserva.findByPk(
+            parseInt(req.params.id),
+            {
+                attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
+                include: [
+                    {
+                        model: db.Destino, as: 'destino',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] }
+                    },
+                    {
+                        model: db.Passageiro, as: 'passageiro',
+                        attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+                    }
+
+                ],
+            }
+        )
+
+        res.status(200)
         res.json(reserva)
     } catch (e) {
         console.log(e)
@@ -123,11 +165,11 @@ app.post('/reserva', async (req, res) => {
 
         // salva reserva
         let reserva = await db.Reserva.create({
-            DestinoId: destino.id,
+            destinoId: destino.id,
             preco: destino.preco,
             partida: partida,
             retorno: retorno,
-            PassageiroId: passageiro.id
+            passageiroId: passageiro.id
         })
 
         // busca reserva, para carregar associações
