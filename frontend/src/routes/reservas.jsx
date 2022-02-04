@@ -1,6 +1,6 @@
 import { Component } from "react";
 import axios from "axios";
-class Reserva extends Component {
+class Reservas extends Component {
     state = {
         reservas: []
     }
@@ -48,4 +48,4 @@ class Reserva extends Component {
     }
 }
 
-export default Reserva
+export default Reservas

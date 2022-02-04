@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Oferta extends Component {
     render() {
@@ -26,7 +27,7 @@ class Oferta extends Component {
                     <p>{this.props.localizacao}</p>
                 </div>
                 <div className="buttons">
-                    <a href="#" className="btn">Reserva</a>
+                    <Link to={"/reservar/" + this.props.id_destino} className="btn">Reserva</Link>
                     <a href="#" className="btn">Detalhes</a>
                 </div>
             </div>

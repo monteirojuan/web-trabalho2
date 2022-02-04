@@ -20,7 +20,7 @@ class Home extends Component {
                 {
                     this.state.destinos
                         .map(destino =>
-                            <Oferta key={destino.id} nome={destino.nome} preco={destino.preco} />
+                            <Oferta key={destino.id} nome={destino.nome} preco={destino.preco} id_destino={destino.id} />
                         )
                 }
             </div>
