@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import FormularioReserva from "../components/FormularioReserva";
+import RealizarReserva from "../components/FormularioReserva";
 
 function withParams(Component) {
     return props => <Component {...props} params={useParams()} />;
@@ -22,7 +22,7 @@ class NovaReserva extends Component {
 
     }
     render() {
-        return < FormularioReserva id_destino={this.state.id} nome={this.state.nome} />
+        return < RealizarReserva id_destino={this.state.id} nome_destino={this.state.nome} />
     }
 }
 

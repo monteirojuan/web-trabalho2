@@ -1,6 +1,9 @@
 import { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import BotaoRemover from "../components/BotaoRemover";
+import BotaoEditar from "../components/BotaoEditar";
+
 class Reservas extends Component {
     state = {
         reservas: []
@@ -34,13 +37,14 @@ class Reservas extends Component {
                             this.state.reservas.map(
                                 reserva =>
                                     <tr>
-                                        <td>{reserva.id}</td>
-                                        <td>{reserva.passageiro.nome}</td>
+                                        <td><Link to={'/reserva/' + reserva.id}>{reserva.id}</Link></td>
+                                        <td><Link to={'/reserva/' + reserva.id}>{reserva.passageiro.nome}</Link>
+                                        </td>
                                         <td>{reserva.passageiro.cpf}</td>
                                         <td>{reserva.destino.nome}</td>
                                         <td>{reserva.partida}</td>
                                         <td>{reserva.retorno}</td>
-                                        <td><BotaoRemover key={'delete' + reserva.id} id_reserva={reserva.id} /></td>
+                                        <td><BotaoRemover key={'delete' + reserva.id} id_reserva={reserva.id} /> - <BotaoEditar key={'edit' + reserva.id} id_reserva={reserva.id} /> </td>
                                     </tr>
                             )
                         }
