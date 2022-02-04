@@ -5,29 +5,39 @@ import axios from "axios";
 class FormularioReserva extends Component {
     constructor(props) {
         super(props)
-        this.state = {
-            id_destino: this.props.id_destino,
-            nome_destino: this.props.nome_destino,
-            partida: '',
-            retorno: '',
-            nome_cliente: '',
-            cpf_cliente: '',
-            quantidade: 1,
-            redirect: false
-        }
+
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    state = {
+        id_destino: this.props.id_destino,
+        nome_destino: '',
+        partida: '',
+        retorno: '',
+        nome_cliente: '',
+        cpf_cliente: '',
+        quantidade: 1,
+        redirect: false
+    }
+
     componentDidMount() {
+        if ('id_destino' in this.props) {
+            axios.get('http://localhost:4000/destino/' + this.props.id_destino)
+                .then(res => {
+                    this.setState({ nome_destino: res.data.nome })
+                })
+        }
         if ('id_reserva' in this.props) {
             document.getElementById("nome-input").disabled = true;
             document.getElementById("cpf-input").disabled = true;
 
             axios.get('http://localhost:4000/reserva/' + this.props.id_reserva)
                 .then(res => {
+                    let destino = res.data.destino
                     this.setState({
-                        nome_destino: res.data.destino.nome,
+                        id_destino: destino.id,
+                        nome_destino: destino.nome,
                         quantidade: 1,
                         partida: new Date(res.data.partida).toISOString().slice(0, 10),
                         retorno: new Date(res.data.retorno).toISOString().slice(0, 10),
@@ -87,7 +97,7 @@ class FormularioReserva extends Component {
                     <div className="user-details">
                         <div className="input-box">
                             <span className="details">Destino</span>
-                            <input type="text" placeholder="Informe o nome do seu destino" disabled value={this.state.nome_destino} />
+                            <input type="text" placeholder="Informe o nome do seu destino" disabled value={this.state.nome_destino} name="nome_destino" />
                         </div>
                         <div className="input-box">
                             <span className="details">Passagens</span>
