@@ -1,5 +1,6 @@
 import { Component } from "react";
 import axios from "axios";
+import BotaoRemover from "../components/BotaoRemover";
 class Reservas extends Component {
     state = {
         reservas: []
@@ -25,6 +26,7 @@ class Reservas extends Component {
                             <th>Destino</th>
                             <th>Data de partida</th>
                             <th>Data de retorno</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,6 +40,7 @@ class Reservas extends Component {
                                         <td>{reserva.destino.nome}</td>
                                         <td>{reserva.partida}</td>
                                         <td>{reserva.retorno}</td>
+                                        <td><BotaoRemover key={'delete' + reserva.id} id_reserva={reserva.id} /></td>
                                     </tr>
                             )
                         }
