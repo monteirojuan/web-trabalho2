@@ -148,7 +148,7 @@ components:
         preco:
           type: number
           example: 500
-    destino:
+    Destino:
       type: object
       properties:
         id:
@@ -160,7 +160,7 @@ components:
         preco:
           type: integer
           example: 500
-    passageiro:
+    Passageiro:
       type: object
       properties:
         nome:
