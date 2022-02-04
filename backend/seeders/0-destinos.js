@@ -3,17 +3,18 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert('Destinos', [
-      { nome: 'Fortaleza', preco: 350.00, createdAt: new Date(), updatedAt: new Date() },
-      { nome: 'Natal', preco: 350.00, createdAt: new Date(), updatedAt: new Date() },
-      { nome: 'Recife', preco: 400, createdAt: new Date(), updatedAt: new Date() },
-      { nome: 'Salvador', preco: 650, createdAt: new Date(), updatedAt: new Date() },
-      { nome: 'Rio de Janeiro', preco: 650, createdAt: new Date(), updatedAt: new Date() },
-      { nome: 'São Paulo ', preco: 750, createdAt: new Date(), updatedAt: new Date() },
-      { nome: 'París', preco: 2200, createdAt: new Date(), updatedAt: new Date() },
-      { nome: 'Frankfurt', preco: 650, createdAt: new Date(), updatedAt: new Date() },
-      { nome: 'Berlim', preco: 2600, createdAt: new Date(), updatedAt: new Date() },
-      { nome: 'Barcelona', preco: 2950, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'Fortaleza', preco: 1000.00, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'Gramado', preco: 1010.00, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'Recife', preco: 200, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'Salvador', preco: 2500, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'Rio de Janeiro', preco: 2300, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'São Paulo', preco: 2100, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'París', preco: 3300, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'Londres', preco: 2789, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'Berlim', preco: 3500, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'Barcelona', preco: 2780, createdAt: new Date(), updatedAt: new Date() },
       { nome: 'Amsterdã', preco: 3000, createdAt: new Date(), updatedAt: new Date() },
+      { nome: 'São Luís', preco: 2000, createdAt: new Date(), updatedAt: new Date() },
     ], {});
 
   },

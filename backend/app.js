@@ -1,12 +1,14 @@
 require("sucrase/register");
 
 import express from 'express'
+import cors from 'cors'
 import db from './models'
 
 const app = express()
-const port = 3000
+const port = 4000
 
 app.use(express.json())
+app.use(cors())
 
 
 app.get('/destinos', async (req, res) => {
@@ -33,7 +35,22 @@ app.get('/destino/:id', async (req, res) => {
 
 app.get('/reservas', async (req, res) => {
     try {
-        let reservas = await db.Reserva.findAll()
+        let reservas = await db.Reserva.findAll(
+            {
+                attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
+                include: [
+                    {
+                        model: db.Destino, as: 'destino',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] }
+                    },
+                    {
+                        model: db.Passageiro, as: 'passageiro',
+                        attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+                    }
+
+                ],
+            }
+        )
         res.json({ reservas: reservas })
     } catch (e) {
         console.log(e)
@@ -50,17 +67,59 @@ app.get('/reserva/:id', async (req, res) => {
                 attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
                 include: [
                     {
-                        model: db.Destino,
+                        model: db.Destino, as: 'destino',
                         attributes: { exclude: ['createdAt', 'updatedAt'] }
                     },
                     {
-                        model: db.Passageiro,
+                        model: db.Passageiro, as: 'passageiro',
                         attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
                     }
 
                 ],
             }
         )
+        res.json(reserva)
+    } catch (e) {
+        console.log(e)
+        res.status(500)
+        res.send('Internal Server Error')
+    }
+})
+
+app.put('/reserva/:id', async (req, res) => {
+    try {
+        let reserva = await db.Reserva.findByPk(parseInt(req.params.id))
+        let novaReserva = {
+            destinoId: req.body.id_destino,
+            partida: req.body.partida,
+            retorno: req.body.retorno
+        }
+        if (novaReserva.DestinoId != reserva.DestinoId) {
+            let destino = await db.Destino.findByPk(parseInt(novaReserva.DestinoId))
+            novaReserva.preco = destino.preco
+        }
+        await db.Reserva.update(novaReserva, { where: { id: parseInt(req.params.id) } })
+
+        // recarrega com relacionamentos
+        reserva = await db.Reserva.findByPk(
+            parseInt(req.params.id),
+            {
+                attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
+                include: [
+                    {
+                        model: db.Destino, as: 'destino',
+                        attributes: { exclude: ['createdAt', 'updatedAt'] }
+                    },
+                    {
+                        model: db.Passageiro, as: 'passageiro',
+                        attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }
+                    }
+
+                ],
+            }
+        )
+
+        res.status(200)
         res.json(reserva)
     } catch (e) {
         console.log(e)
@@ -106,11 +165,11 @@ app.post('/reserva', async (req, res) => {
 
         // salva reserva
         let reserva = await db.Reserva.create({
-            DestinoId: destino.id,
+            destinoId: destino.id,
             preco: destino.preco,
             partida: partida,
             retorno: retorno,
-            PassageiroId: passageiro.id
+            passageiroId: passageiro.id
         })
 
         // busca reserva, para carregar associações
@@ -120,11 +179,11 @@ app.post('/reserva', async (req, res) => {
                 attributes: { exclude: ['DestinoId', 'PassageiroId', 'createdAt', 'updatedAt'] },
                 include: [
                     {
-                        model: db.Destino,
+                        model: db.Destino, as: 'destino',
                         attributes: { exclude: ['createdAt', 'updatedAt'] }
                     },
                     {
-                        model: db.Passageiro,
+                        model: db.Passageiro, as: 'passageiro',
                         attributes: { exclude: ['createdAt', 'updatedAt'] }
                     }
 

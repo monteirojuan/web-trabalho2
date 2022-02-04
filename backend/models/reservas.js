@@ -4,8 +4,8 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Reserva extends Model {
         static associate(models) {
-            this.belongsTo(models.Destino, { foreignKey: { allowNull: false } })
-            this.belongsTo(models.Passageiro, { foreignKey: { allowNull: false } })
+            this.belongsTo(models.Destino, { as: 'destino', foreignKey: { allowNull: false } })
+            this.belongsTo(models.Passageiro, { as: 'passageiro', foreignKey: { allowNull: false } })
         }
     }
     Reserva.init({
